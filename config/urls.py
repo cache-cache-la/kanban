@@ -20,5 +20,3 @@ urlpatterns = [
     path("kanban/", include("kanban.urls")),
     path('admin/', admin.site.urls),
 ]
-
-# test
