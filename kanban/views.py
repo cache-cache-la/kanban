@@ -2,12 +2,14 @@ from django.shortcuts import render
 from django.contrib.auth import login
 from django.contrib.auth.forms import UserCreationForm
 from django.shortcuts import render, redirect
+from django.contrib.auth.decorators import login_required
 
 # トップページ
 def index(request):
     return render(request, "kanban/index.html")
 
 # サインアップ完了
+@login_required
 def home(request):
     return render(request, "kanban/home.html")
 

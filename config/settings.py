@@ -123,5 +123,8 @@ STATIC_URL = '/static/'
 # ログイン後のリダイレクト先
 LOGIN_REDIRECT_URL = "kanban:home"
 
+# ログインページ
+LOGIN_URL = "login"
+
 # ログアウト後のリダイレクト先
 LOGOUT_REDIRECT_URL = "kanban:index"
