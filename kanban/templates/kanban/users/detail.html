@@ -13,5 +13,6 @@
     <dt class="col-sm-3">メールアドレス</dt>
     <dd class="col-sm-9">{{ user.email }}</dd>
   </dl>
+  <a class="btn btn-primary" href="{% url 'kanban:users_update' user.pk  %}" role="button">編集</a>
 </div>
 {% endblock %}
