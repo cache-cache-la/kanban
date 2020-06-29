@@ -2,17 +2,6 @@
 # $GIT_DIR/info/exclude or the core.excludesFile configuration variable as
 # described in https://git-scm.com/docs/gitignore
 
-*.egg-info
-*.pot
-*.py[co]
-.tox/
-__pycache__
-MANIFEST
-dist/
-docs/_build/
-docs/locale/
-node_modules/
-tests/coverage_html/
-tests/.coverage
-build/
-tests/report/
+staticfiles
+config/local_settings.py
+db.sqlite3

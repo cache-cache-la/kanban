@@ -25,7 +25,7 @@ SECRET_KEY = 'v@jvok3!vk^=q4v)l(j8b^gtk731uj-fyted^4i(t@ihg%4*7+'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["kanban-20200629.herokuapp.com"]
 
 
 # Application definition
@@ -81,6 +81,9 @@ DATABASES = {
     }
 }
 
+import dj_database_url
+db_from_env = dj_database_url.config()
+DATABASES['default'].update(db_from_env)
 
 # Password validation
 # https://docs.djangoproject.com/en/3.0/ref/settings/#auth-password-validators
@@ -117,8 +120,11 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
-
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 STATIC_URL = '/static/'
+STATICFILES_DIRS = (
+    os.path.join(BASE_DIR, 'static'),
+)
 
 # ログイン後のリダイレクト先
 LOGIN_REDIRECT_URL = "kanban:home"
@@ -128,3 +134,15 @@ LOGIN_URL = "login"
 
 # ログアウト後のリダイレクト先
 LOGOUT_REDIRECT_URL = "kanban:index"
+
+# 開発環境と本番環境の分離
+DEBUG = False
+
+try:
+    from config.local_settings import *
+except ImportError:
+    pass
+
+if not DEBUG:
+    import django_heroku
+    django_heroku.settings(locals())
