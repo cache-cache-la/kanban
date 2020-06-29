@@ -7,9 +7,9 @@ from django.contrib.auth.models import User
 from django.shortcuts import render, redirect, resolve_url
 from django.urls import reverse_lazy
 from django.views.generic import DetailView, UpdateView, CreateView, ListView, DeleteView
-from .forms import UserForm, ListForm
+from .forms import UserForm, ListForm, CardForm
 from .mixins import OnlyYouMixin
-from . models import List
+from . models import List, Card
 
 # トップページ
 def index(request):
@@ -85,4 +85,41 @@ class ListDeleteView(LoginRequiredMixin, DeleteView):
     template_name = "kanban/lists/delete.html"
     form_class = ListForm
     success_url = reverse_lazy("kanban:lists_list")
+
+# カード作成
+class CardCreateView(LoginRequiredMixin, CreateView):
+    model = Card
+    template_name = "kanban/cards/create.html"
+    form_class = CardForm
+    success_url = reverse_lazy("kanban:cards_list")
+
+    def form_valid(self, form):
+        form.instance.user = self.request.user
+        return super().form_valid(form)
+
+# カード閲覧
+class CardListView(LoginRequiredMixin, ListView):
+    model = Card
+    template_name = "kanban/cards/list.html"
+
+
+class CardDetailView(LoginRequiredMixin, DetailView):
+    model = Card
+    template_name = "kanban/cards/detail.html"
+
+# カード編集
+class CardUpdateView(LoginRequiredMixin, UpdateView):
+    model = Card
+    template_name = "kanban/cards/update.html"
+    form_class = CardForm
+
+    def get_success_url(self):
+        return resolve_url('kanban:cards_detail', pk=self.kwargs['pk'])
+
+# カード削除
+class CardDeleteView(LoginRequiredMixin, DeleteView):
+    model = Card
+    template_name = "kanban/cards/delete.html"
+    form_class = CardForm
+    success_url = reverse_lazy("kanban:cards_list")
 
