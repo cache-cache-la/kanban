@@ -107,3 +107,19 @@ class CardDetailView(LoginRequiredMixin, DetailView):
     model = Card
     template_name = "kanban/cards/detail.html"
 
+# カード編集
+class CardUpdateView(LoginRequiredMixin, UpdateView):
+    model = Card
+    template_name = "kanban/cards/update.html"
+    form_class = CardForm
+
+    def get_success_url(self):
+        return resolve_url('kanban:cards_detail', pk=self.kwargs['pk'])
+
+# カード削除
+class CardDeleteView(LoginRequiredMixin, DeleteView):
+    model = Card
+    template_name = "kanban/cards/delete.html"
+    form_class = CardForm
+    success_url = reverse_lazy("kanban:cards_list")
+
