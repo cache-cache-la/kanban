@@ -19,3 +19,9 @@ class CardForm(forms.ModelForm):
     class Meta:
         model = Card
         fields = ("title", "description", "list")
+
+class CardCreateFromHomeForm(forms.ModelForm):
+
+    class Meta:
+        model = Card
+        fields = ("title", "description",)
