@@ -6,7 +6,9 @@ app_name = "kanban"
 
 urlpatterns = [
     path("", views.index, name="index"),
+    path("cards/", views.CardListView.as_view(), name="cards_list"),
     path("cards/create/", views.CardCreateView.as_view(), name="cards_create"),
+    path("cards/<int:pk>/", views.CardDetailView.as_view(), name="cards_detail"),
     path("home/", views.home, name="home"),
     path("lists/", views.ListListView.as_view(), name="lists_list"),
     path("lists/create/", views.ListCreateView.as_view(), name="lists_create"),
