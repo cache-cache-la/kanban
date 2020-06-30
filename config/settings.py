@@ -22,9 +22,6 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = 'v@jvok3!vk^=q4v)l(j8b^gtk731uj-fyted^4i(t@ihg%4*7+'
 
-# SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
-
 ALLOWED_HOSTS = ["kanban-20200629.herokuapp.com"]
 
 
